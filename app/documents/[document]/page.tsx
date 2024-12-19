@@ -1,10 +1,13 @@
-import Tiptap from "@/components/tiptap";
+import Editor from "@/components/editor";
+import Toolbar from "@/components/toolbar";
+
 import React from "react";
 
 const page = async () => {
   return (
     <div className="min-h-screen bg-[#FAFBFD ]">
-      <Tiptap />
+      <Toolbar />
+      <Editor />
     </div>
   );
 };
