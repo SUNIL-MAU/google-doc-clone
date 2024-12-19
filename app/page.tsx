@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
           priority
         />
         <Button variant={"outline"}>click me</Button>
+        <Link href="/documents/123">go to doc page</Link>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
