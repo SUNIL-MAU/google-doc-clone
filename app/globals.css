@@ -267,4 +267,15 @@ body {
       outline: 3px solid var(--purple);
     }
   }
+
+  /* link styles */
+
+  a {
+    @apply text-blue-600;
+    cursor: pointer;
+
+    &:hover {
+      @apply underline;
+    }
+  }
 }

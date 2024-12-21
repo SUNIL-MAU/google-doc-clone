@@ -14,6 +14,12 @@ import { useEditorStore } from "@/store/use-editor-store";
 import Underline from "@tiptap/extension-underline";
 import FontFamily from "@tiptap/extension-font-family";
 import TextStyle from "@tiptap/extension-text-style";
+import Highlight from "@tiptap/extension-highlight";
+import { Color } from "@tiptap/extension-color";
+import TextAlign from "@tiptap/extension-text-align";
+import Link from "@tiptap/extension-link";
+import { FontSizeExtension } from "@/extensions/font-size";
+import { LineHeightExtension } from "@/extensions/line-height";
 
 const Editor = () => {
   const { setEditor } = useEditorStore();
@@ -40,6 +46,9 @@ const Editor = () => {
       TaskItem.configure({
         nested: true,
       }),
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
+      }),
       Table.configure({
         resizable: true,
       }),
@@ -51,10 +60,24 @@ const Editor = () => {
       Underline,
       FontFamily,
       TextStyle,
+      Highlight.configure({ multicolor: true }),
+      Color,
+      Link.configure({
+        openOnClick: true,
+        autolink: true,
+        defaultProtocol: "https",
+      }),
+      FontSizeExtension,
+      LineHeightExtension.configure({
+        types: ["paragraph", "heading"],
+        defaultLineHeight: "normal",
+      }),
     ],
     content: `
-    <p>This is a basic example of implementing images. Drag to re-order.</p>
-
+    <p>This isn’t highlighted.</s></p>
+    <p><mark>But that one is.</mark></p>
+    <p><mark style="background-color: red;">And this is highlighted too, but in a different color.</mark></p>
+    <p><mark data-color="#ffa8a8">And this one has a data attribute.</mark></p>
   `,
     immediatelyRender: false,
     shouldRerenderOnTransaction: false,
@@ -62,7 +85,7 @@ const Editor = () => {
 
   return (
     <div className="size-full   overflow-x-auto bg-[#F9FBFD] px-4 print:px-0 print:bg-white print:overflow-visible">
-      <div className="min-w-max flex justify-center w-[816px] spy-4 print:py-0  mx-auto print:w-full print:min-w-0'>">
+      <div className="min-w-max flex justify-center w-[816px] py-4 print:py-0  mx-auto print:w-full print:min-w-0'>">
         <EditorContent editor={editor} />
       </div>
     </div>
